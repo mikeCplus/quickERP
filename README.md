@@ -4,7 +4,7 @@
 ###### For the Brock University Cognitive and Affective
 ###### Neuroscience Laboratory (BUCANL) 
 ###### Under the supervision of Dr. Sidney Segalowitz, PhD
-#___________________________________________________________#
+___________________________________________________________
 
 ### Required packages
 * numpy
