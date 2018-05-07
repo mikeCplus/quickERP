@@ -16,10 +16,10 @@ ___________________________________________________________
 ##### Assuming there is already a default native version of Python on these operating systems with most of the packages required to run this code, there is very little involved in getting MUSE_EEG downloaded and installed on Linux or MacOS:
 1. Make sure you open the BASH "terminal" app.
 2. Navigate to a desired directory where you'd like MUSE_EEG downloaded and installed (using 'ls' to check all files and folders within your current directory, and using 'cd' to navigate to a new directory). There are many tutorials online for navigating through a BASH terminal, so we won't go into more detail here. Here are some extra resources that can help you get acquainted with the most common commands you should familiarize with to use the BASH terminal:
-    a. https://www.codecademy.com/learn/learn-the-command-line
-    b. https://www.udacity.com/course/linux-command-line-basics--ud595
-    c. http://www.learnshell.org/ 
-    d. https://www.bash.academy/
+    *a. https://www.codecademy.com/learn/learn-the-command-line
+    *b. https://www.udacity.com/course/linux-command-line-basics--ud595
+    *c. http://www.learnshell.org/ 
+    *d. https://www.bash.academy/
 3. Once you've navigated to the desired directory, you can clone (download) the MUSE_EEG repository from github into that directory. Everything you need will be in that directory.
 4. (Optional) You may choose to rename the MUSE_EEG folder to something more meaningful (i.e. the project or study name) if you wish.
 5. It is quite possible you do not have the psychopy package installed by default in Python. Don't panic! There are various ways to do this. The following site explains how this can be done: http://psychopy.org/installation.html
