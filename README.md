@@ -1,9 +1,9 @@
 ### MUSE EEG v.18.05.07  
-# Inspired by Brenda De Witt
-# Written by Brad Kennedy, Tyler Collins, and Mike Cichonski
-# For the Brock University Cognitive and Affective
-# Neuroscience Laboratory (BUCANL) 
-# Under the supervision of Dr. Sidney Segalowitz, PhD
+###### Inspired by Brenda De Witt
+###### Written by Brad Kennedy, Tyler Collins, and Mike Cichonski
+###### For the Brock University Cognitive and Affective
+###### Neuroscience Laboratory (BUCANL) 
+###### Under the supervision of Dr. Sidney Segalowitz, PhD
 ##############################################################
 
 ##### Required packages
