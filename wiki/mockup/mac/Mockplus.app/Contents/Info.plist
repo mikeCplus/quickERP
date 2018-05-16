@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	    <!-- File associations. -->
+	<key>CFBundleDocumentTypes</key>
+	<array>
+        <!-- Allow dragging and dropping plain text and XML files onto the application's Dock icon;
+             this setting also adds us to the Open With menu for those file types. -->
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.plain-text</string>
+			</array>
+		</dict>
+        <!-- Associate a custom file type (details of the type itself are declared below).
+             LSHandlerRank is set to Owner so that our application will be used when such a
+             file is double clicked in Finder. -->
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.mockplus.mp</string>
+			</array>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+		    <!-- Icon file for the type - should be put in the Contents/Resources sub-directory
+                 of the bundle). -->
+			<key>CFBundleTypeIconFile</key>
+			<string>Mockplus.icns</string>
+		</dict>
+	</array>
+    <!-- Custom file types (just the one is declared here). -->
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+		    <!-- The 'UDI' of the type we are declaring. -->
+			<key>UTTypeIdentifier</key>
+			<string>com.mockplus.mp</string>
+		    <!-- Set the parent type - use public.data if doesn't have one. -->
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+			</array>
+		    <!-- Human-readable description of the type. -->
+			<key>UTTypeDescription</key>
+			<string>Mockplus document</string>
+		    <!-- Icon file for the type. Due to an OS X bug, this key gets ignored,
+                 requiring the use of the 'legacy' CFBundleTypeIconFile key above. -->
+			<key>UTTypeIconFile</key>
+			<string>Mockplus.icns</string>
+		    <!-- Declare the file extension (.mp in our case). -->
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string></string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+
+	<key>CFBundleName</key>
+    <string>Mockplus</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mockplus</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.mockplus.desktop.chinese</string>
+	<key>CFBundleVersion</key>
+	<string>3.3.2.3</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<string>YES</string>
+	<key>CFBundleExecutable</key>
+	<string>Mockplus</string>
+	<key>NSHighResolutionCapable</key>
+	<string>true</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>CFBundleIconFile</key>
+	<string>Mockplus.icns</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.3.2.3</string>
+	<key>ATSApplicationFontsPath</key>
+	<string>Fonts</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<string>true</string>
+</dict>
+</plist>
