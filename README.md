@@ -6,4 +6,4 @@
 ##### Copyright © 2018
 ___________________________________________________________
 
-This allows the Muse™ device from InterAxon Inc. to collect data to be used for EEG processing in Research. But this is the beginning of something much bigger... Check the [Wiki](https://github.com/mikeCplus/quickERP/wiki) on how to get started!
+This allows the Muse™ device from InterAxon Inc. to collect data to be used for EEG processing in Research. But this is the beginning of something much bigger... Check the [**WIKI**](https://github.com/mikeCplus/quickERP/wiki) on how to get started!
