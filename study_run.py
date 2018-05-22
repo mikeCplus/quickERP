@@ -1,10 +1,28 @@
 from __future__ import print_function
+# -*- coding: utf-8 -*-
+#########################################################################
+##  QuickERP (May 22, 2017)                                            ## ##                                                                     ##
+##  by Mike Cichonski @ Brock Univerity Cognitive and Affective        ##
+##  Neuroscience Lab (BUCANL)                                          ## 
+##  © 2017 BUCANL / Under supervision of Dr. Sidney Segalowitz         ##
+##  Code Written by Mike Cichonski                                     ##
+##  Not for distribution or publication without permission of          ##
+##  the director of BUCANL.                                            ##
+##                                                                     ##
+##  file: study_run.py                                                 ##
+##  Runs the study once the participant, paradigm, and equipment are   ##
+##  set up. More documentation on this to come. This is the main file. ##
+#########################################################################
+
+from __future__ import print_function
 import os, sys
 import datetime
 
 # Local files
+from scripts import objects as obj
 from scripts import task_skeleton
 from scripts import acquire
+from scripts import gui
 
 # Python packages
 from multiprocessing import Queue, Process
@@ -41,6 +59,9 @@ def acq_wrap(acqfname, logfname, sub_path, starttime, in_channel, msg_channel, s
     logfid.close()
 
 def start_study():
+
+    obj = Experiment(
+    gui.display()
     
     print('Participant Id: ', end='')
     sub_id = raw_input()

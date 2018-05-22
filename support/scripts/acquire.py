@@ -1,4 +1,21 @@
 from __future__ import print_function
+# -*- coding: utf-8 -*-
+#########################################################################
+##  QuickERP (May 22, 2017)                                            ## ##                                                                     ##
+##  by Mike Cichonski @ Brock Univerity Cognitive and Affective        ##
+##  Neuroscience Lab (BUCANL)                                          ## 
+##  © 2017 BUCANL / Under supervision of Dr. Sidney Segalowitz         ##
+##  Code Written by Mike Cichonski                                     ##
+##  Not for distribution or publication without permission of          ##
+##  the director of BUCANL.                                            ##
+##                                                                     ##
+##  file: acquire.py                                                   ##
+##  Acquires the data points from the Muse device at the desired       ##
+##  sample rate. It also aligns the samples so that the chunks of      ##
+##  samples don't arrive in bursts, but at a realistically constant    ##
+##  rate.                                                              ##
+#########################################################################
+
 import os, sys
 from plugins.pylsl import StreamInlet, resolve_byprop
 import subprocess

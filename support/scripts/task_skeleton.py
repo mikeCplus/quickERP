@@ -1,9 +1,24 @@
 from __future__ import print_function
+# -*- coding: utf-8 -*-
+#########################################################################
+##  QuickERP (May 22, 2017)                                            ## ##                                                                     ##
+##  by Mike Cichonski @ Brock Univerity Cognitive and Affective        ##
+##  Neuroscience Lab (BUCANL)                                          ## 
+##  © 2017 BUCANL / Under supervision of Dr. Sidney Segalowitz         ##
+##  Code Written by Mike Cichonski                                     ##
+##  Not for distribution or publication without permission of          ##
+##  the director of BUCANL.                                            ##
+##                                                                     ##
+##  file: task_skeleton.py                                             ##
+##  This file defines the actual task and order of stimuli. It can     ##
+##  define a number of sub-tasks as functions and then call them       ##
+##  in a desired order and number of repeats.                          ##
+#########################################################################
+
 from psychopy import core, visual, event, gui, monitors
 import random
 import datetime
 import sys
-
 
 # Instruct sting to be displayed before actual task starts
 instructions = """
