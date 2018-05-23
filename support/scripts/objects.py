@@ -15,24 +15,34 @@ from future import print_function
 ##                                                                     ##
 #########################################################################
 
+import os
 import json
+from random import shuffle
 
 ROOT_PROJECT_PATH = '../../'
 
 ### DEFINE: Event ###
 class Event:
-    '''A single "event" - includes two stimuli, result, and reaction time'''
+    '''A single 'Event' - includes a name and a latency'''
 
     def __init__(self,name,latency):
-        "creates a new instance of an Event"
-        '''
-        name is the event name
-        latency is the event latency in ms since the start of the recording'''
-        self.name = name
+        '''creates a new instance of an Event
+        name:    the event name
+        latency: the event latency in ms since the start of the recording'''
+        self.name = str(name)        
         self.latency = float(latency)
+        self.index = -1 # will be given a positive value once added to block
 
-    def jsonify(self):
-        return {'name':self.name,'latency',self.latency}
+    def jsonify(self,save=True):
+        event = {self.name:self.latency} 
+        if save:
+            savedir = ROOT_PROJECT_PATH+'task/paradigms/events/'
+            if not os.path.exists(savedir):
+                os.makedirs(savedir)
+            with open(savedir + self.name+ '.json','w',encoding='utf-8') as out:
+            success = json.dump(event,out)
+            print(success)
+        return event
 
 ### END: Event ###
 
@@ -40,59 +50,148 @@ class Event:
 ### DEFINE: Block ###
 class Block:
     '''A block (or 'pattern') of Events'''
-       
-    def __init__(self,name,events=[]):
-        "creates a new instance of a block of events'
-        self.name = name
-        self.events = events
 
-    def __init__(self,name='',events=[]):
-        "creates a new instance of a block of events'
-        self.name = self.next_name()
-        self.events = events
+    def __init__(self,name=self.___next_name(),bname='default',events=[]):
+        '''creates a new instance of a block of events
+        name:   the name of the block (e.g. 'pattern_013')
+        bname:  the name of the Blocks object (e.g. 'set_02')
+        events: the list of Events
+        size:   the number of Events in this block'''
+        self.name = self.next_name() # creates a default block name
+        self.bname = bname # creates a default bname called 'default'
+        self.events = events # sequential list of events
+        self.count = len(self.events)
 
-    def addEvent(self,event):
+    def addEvent(self,new):
         '''add a single event to the block
-        indices will adjust accordingly based on latency'''
-        if self.events==[]: self.events.append(event)
-        for i,e in enumerate(self.events):
-            if event.latency>=e.latency:
-                self.events.insert(i,event)
-                break
-    
-    
-    def nextName(self,digits=3)
+        indices will adjust accordingly based on latency
+        returns the index of the newly added event'''
+        # if this is the first event...
+        if self.events==[]:
+            self.events.append(event);
+            self.events[0].index = 0
+            self.count = 1
+            return 0
+        # if this event has a latency earlier than the first event...
+        if new.latency<self.events[0].latency:
+                self.events.insert(0,event)
+                self.events[0].index = 0
+                for e in self.events[1:]:
+                    e.index += 1
+                self.count += 1
+                return 0
+        # every other case...
+        for i,old in enumerate(self.events):
+            if new.latency>=self.events[0].latency:
+                if new.latency>=old.latency:
+                    self.events.insert(i+1,event)
+                    self.events[i+1].index = i+1
+                    for e in self.events[i+2:]:
+                        e.ind'ex += 1
+                    self.count += 1
+                    return i+1
+
+    def __nextName(self,digits=3)
         ''' digits represents how many different possible 
         participant numbers you can have'''
-        if not hasattr(nextName,'nextName') and '
-        if not hasattr(nextName,'num'):
-            self.num = 0
-            self.nextName = '000'
-        num_len = len(str(self.num))
-        self.nextName = '0'*(digits-num_len)+str(self.num)
+        if not hasattr(self.nextName,'nextName'):
+            self.nextName = 'pattern_000'
+        num_len = len(str(self.count-1))
+        self.nextName = 'pattern_' + '0'*(digits-num_len) + str(self.num)
         return self.nextName
+ 
+    def jsonify(self,save=True):
+        '''puts the Block object into json form
+           can also be saved as a .json (default: self.name)
+           save: either True or False, depending on if we want to save the files'''
+        events = {}
+        for i,e in enumerate(self.events):
+            events.update({i:e.jsonify()})
+        events = {'events':events}
         
-
-    def jsonify(self):
-        j_events = [e.jsonify() for e in self.events]
-        return {'events',j_events}
-
+        # if we save a single block, we'll just put it in a 'default' folder
+        if save:
+            savedir = ROOT_PROJECT_PATH+'task/paradigms/default/'
+            if not os.path.exists(savedir):
+                os.makedirs(savedir)
+            with open(ROOT_PROJECT_PATH+'task/paradigms/default/' + \
+              self.name+ '.json','w',encoding='utf-8') as out:
+            success = json.dump(events,out)
+            print(success)
+        return events
 
 ### END: Block ###
+
+### DEFINE: Blocks ###
+class Blocks:
+
+    def __init__(self,name,blocks=[]):
+        '''creates a new instance of a set of Blocks
+        name:   name of the Block set
+        blocks: a list of Block objects'''
+        self.name = name
+        self.blocks = blocks
+        self.count = len(blocks)
+
+    def addBlock(self,block,ind=-1):
+        '''appends a new Block object to the list of Blocks
+        block: a Block object
+        ind:   an integer representing the index of where to
+               insert the block (default is end of list)
+        returns the current Blocks object'''
+        if ind<0: self.blocks.append(block)
+        else: self.blocks.insert(ind,block)
+        self.count += 1
+        return self
+
+    def randomize(self):
+        self.blocks = shuffle(self.blocks)
+
+    def jsonify(self,save=True):
+        '''puts the Blocks object into json form
+           can also be saved as a .json (default: block.name)
+           save: either True or False, depending on if we want to save the files'''
+        blocks = {}
+        for i,b in enumerate(self.blocks):
+            blocks.update({i:b.jsonify()})
+        blocks = {'blocks':blocks}
+
+        if save:
+            for block in self.blocks:
+                with open(ROOT_PROJECT_PATH+'task/paradigms/'+ self.name + \
+                  '/' + block.name+ '.json','w',encoding='utf-8') as out:
+                    success = json.dump(blocks,out)
+        return blocks
+
+### END: Blocks ###
 
 ### DEFINE: Participant ###
 class Participant:
     '''a participant in the study.'''
 
-    def __init__(self, name, sex, age, block_order):
-        "creates a new instance of a participant"
+    def __init__(self, pid, name, sex, age, blocks):
+        '''creates a new instance of a participant
+        pid:     ID given to the participant
+        name:   name given to the participant
+        sex:    a string that can be 'M' or 'Male', 'F' or 'Female', or 'N/A'
+        age:    an integer (or float) value representing participant age
+        blocks: a Blocks structure representing order of Blocks'''
+        self.id = pid
         self.name = name
         self.sex = sex
         self.age = age
-        self.block_order = block_order # index of orders of presented blocks
+        self.blocks = blocks
 
-    def jsonify(self):
-        return {'name':self.name,'sex':self.sex,'age':self.age,'block_order':block_order}
+    def jsonify(self,save=True):
+        part = {'id':self.id,'name':self.name,'sex':self.sex,'age':self.age,'blocks':blocks}
+        if save:
+            
+            with open(ROOT_PROJECT_PATH+'task/participants/sub-'+ \ 
+               '0'*(3-(len(self.id))) + '/' + self.name+ '.json', \
+               'w',encoding='utf-8') as out:
+                success = json.dump(part,out)
+        return part
+    
 
 ### END: Participant ###
 
@@ -240,4 +339,4 @@ class Experiment:
         with open(ROOT_PROJECT_PATH+self.name+'.exp','w',encoding='utf-8') as out:
             return json.dump(data,out)
 
-### END: Experiment ###
+### END: Experiment ###name of the Block
